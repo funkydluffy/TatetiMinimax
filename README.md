@@ -2,7 +2,7 @@
 
 This is a learning personal proyect. Here I try to get more involved with Python language, and to get in touch with my long-term goals about AI.
 
-Let me introduce you in the first stage, a script that i modified to understand it and customize it. In this script I face an AI wich plays Tic tac toe using Minimax algorythm, that I'm planning to train it to never lose.
+Let me introduce you in the first stage, a script that i modified to understand it and customize it. In this script I face an AI wich plays Tic tac toe using Minimax algorythm, that I'm planning to train it for never lose.
 
 .
 
