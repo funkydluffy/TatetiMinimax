@@ -1,6 +1,7 @@
 # TatetiMinimax
 
-This is a learning personal proyect. Here I try get more involved with Python language trying to get in touch my long-term goals about AI.
+This is a learning personal proyect. Here I try get more involved with Python language, trying to get in touch my long-term goals about AI.
+
 Let me introduce you in the first stage, a script that i modified to understand it and customize it. In this script I face an AI wich plays Tic tac toe using Minimax algorythm, that I'm planning to train for it never lose.
 
 .
