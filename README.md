@@ -4,7 +4,6 @@ This is a learning personal proyect. Here I try get more involved with Python la
 Let me introduce you in the first stage, a script that i modified to understand it and customize it. In this script I face an AI wich plays Tic tac toe using Minimax algorythm, that I'm planning to train for it never lose.
 .
 .
-
 .
 .
 .
