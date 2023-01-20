@@ -155,7 +155,7 @@ def minimax(estado, depth, jugador):
     return mejor
 
 
-def clean():
+def limpieza():
 
     """
     Limpia la consola
@@ -168,7 +168,7 @@ def clean():
         system('clear')
 
 
-def render(estado, ia_elije, h_elije):
+def impresion(estado, ia_elije, h_elije):
     
     """
     Imprime el tablero en la consola
@@ -176,19 +176,19 @@ def render(estado, ia_elije, h_elije):
     actual del tablero.
     """
 
-    chars = {
+    letra = {
         -1: h_elije,
         +1: ia_elije,
         0: ' '
     }
-    str_line = '---------------'
+    linea = '---------------'
 
-    print('\n' + str_line)
+    print('\n' + linea)
     for fila in estado:
         for celda in fila:
-            symbol = chars[celda]
-            print(f'| {symbol} |', end='')
-        print('\n' + str_line)
+            simbolo = letra[celda]
+            print(f'| {simbolo} |', end='')
+        print('\n' + linea)
 
 
 def turno_ia(ia_elije, h_elije):
@@ -204,9 +204,9 @@ def turno_ia(ia_elije, h_elije):
     if depth == 0 or game_over(tablero):
         return
 
-    clean()
-    print(f'Computer turn [{ia_elije}]')
-    render(tablero, ia_elije, h_elije)
+    limpieza()
+    print(f'Le toca a la IA [{ia_elije}]')
+    impresion(tablero, ia_elije, h_elije)
 
     if depth == 9:
         x = choice([0, 1, 2])
@@ -231,7 +231,7 @@ def turno_humano(ia_elije, h_elije):
     if depth == 0 or game_over(tablero):
         return
 
-    # Dictionary of valid moves
+    # Muestra las movidas válidas
     movida = -1
     movidas = {
         1: [0, 0], 2: [0, 1], 3: [0, 2],
@@ -239,24 +239,24 @@ def turno_humano(ia_elije, h_elije):
         7: [2, 0], 8: [2, 1], 9: [2, 2],
     }
 
-    clean()
-    print(f'Human turn [{h_elije}]')
-    render(tablero, ia_elije, h_elije)
+    limpieza()
+    print(f'Te toca [{h_elije}]')
+    impresion(tablero, ia_elije, h_elije)
 
     while movida < 1 or movida > 9:
         try:
-            movida = int(input('Use numpad (1..9): '))
+            movida = int(input('Elegir posición en el tablero (1..9): '))
             coord = movidas[movida]
-            can_move = set_movida(coord[0], coord[1], HUMANO)
+            movida_posible = set_movida(coord[0], coord[1], HUMANO)
 
-            if not can_move:
-                print('Bad move')
+            if not movida_posible:
+                print('Movimiento inváldo')
                 movida = -1
         except (EOFError, KeyboardInterrupt):
-            print('Bye')
+            print('Adios')
             exit()
         except (KeyError, ValueError):
-            print('Bad choice')
+            print('Elección incorrecta')
 
 
 def main():
@@ -266,40 +266,40 @@ def main():
     que accederá al resto de las funciones.
     """
     
-    clean()
-    h_elije = ''  # X or O
-    ia_elije = ''  # X or O
-    primero = ''  # if human is the first
+    limpieza()
+    h_elije = ''  # X u O
+    ia_elije = ''  # X u O
+    primero = ''  # Si empieza el humano
 
-    # Human chooses X or O to play
+    # El humano elije el simbolo con el que juega
     while h_elije != 'O' and h_elije != 'X':
         try:
             print('')
-            h_elije = input('Choose X or O\nChosen: ').upper()
+            h_elije = input('Elegí X or O\nElección: ').upper()
         except (EOFError, KeyboardInterrupt):
-            print('Bye')
+            print('Adios')
             exit()
         except (KeyError, ValueError):
-            print('Bad choice')
+            print('Elección incorrecta')
 
-    # Setting computer's choice
+    # Preparando la elección de la IA
     if h_elije == 'X':
         ia_elije = 'O'
     else:
         ia_elije = 'X'
 
-    # Human may starts first
-    clean()
-    while primero != 'Y' and primero != 'N':
+    # El humano empieza
+    limpieza()
+    while primero != 'S' and primero != 'N':
         try:
-            primero = input('First to start?[y/n]: ').upper()
+            primero = input('Querés empezar?[s/n]: ').upper()
         except (EOFError, KeyboardInterrupt):
-            print('Bye')
+            print('Adios')
             exit()
         except (KeyError, ValueError):
-            print('Bad choice')
+            print('Elección incorrecta')
 
-    # Main loop of this game
+    # Bucle principal del juego
     while len(celdas_vacias(tablero)) > 0 and not game_over(tablero):
         if primero == 'N':
             turno_ia(ia_elije, h_elije)
@@ -308,21 +308,21 @@ def main():
         turno_humano(ia_elije, h_elije)
         turno_ia(ia_elije, h_elije)
 
-    # Game over message
+    # Fin del juego (Game over)
     if gana(tablero, HUMANO):
-        clean()
-        print(f'Human turn [{h_elije}]')
-        render(tablero, ia_elije, h_elije)
-        print('YOU WIN!')
+        limpieza()
+        print(f'Te toca [{h_elije}]')
+        impresion(tablero, ia_elije, h_elije)
+        print('Ganaste!')
     elif gana(tablero, IA):
-        clean()
-        print(f'Computer turn [{ia_elije}]')
-        render(tablero, ia_elije, h_elije)
-        print('YOU LOSE!')
+        limpieza()
+        print(f'Turno de la IA [{ia_elije}]')
+        impresion(tablero, ia_elije, h_elije)
+        print('Perdiste!')
     else:
-        clean()
-        render(tablero, ia_elije, h_elije)
-        print('DRAW!')
+        limpieza()
+        impresion(tablero, ia_elije, h_elije)
+        print('Empate!')
 
     exit()
 
