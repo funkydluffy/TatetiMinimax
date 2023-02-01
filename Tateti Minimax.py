@@ -5,7 +5,7 @@ import time
 from os import system
 
 """
-Entrenamiento con algoritmo Minimax:
+Entrenamiento de edición con algoritmo Minimax:
 Ta Te Ti resuelto con Minimax en Python.
 Gabriel Coria.
 """
